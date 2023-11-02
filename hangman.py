@@ -14,3 +14,9 @@ def get_random_word(wordlist="/usr/share/dict/words"):
             good_words.append(word)
 
         return random.choice(good_words)
+def mask(word):
+    mask_word=""
+    for w in word:
+        mask_word+="-"
+    return mask_word
+    # print(mask("apple1234"))
