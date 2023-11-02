@@ -3,10 +3,10 @@ import os
 import hangman
 
 def test_random_word_lowercase():
-    fname = "/usr/share/dict/words"
-    # fname = "/tmp/sample_wordlist"
-    # with open(fname, "w") as f:
-    #     f.writelines(["Grape\n", "apple\n", "Mango\n"])
+    # fname = "/usr/share/dict/words"
+    fname = "/tmp/sample_wordlist"
+    with open(fname, "w") as f:
+        f.writelines(["Grape\n", "apple\n", "Mango\n"])
         
     for _ in range(100):
         assert hangman.get_random_word(fname) == "apple"
