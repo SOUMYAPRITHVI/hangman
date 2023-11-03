@@ -54,5 +54,12 @@ def input_guessed_letter(target_word,masked_word ):
             # print(f"Sorry, you lose! The word was '{target_word}'.")
             print("Sorry, you lose! The word was ",target_word)
             return "lose"
-
+def guessed_word(target_word,guess_letters):
+    new_masked_word = ""
+    for letter in target_word:
+        if letter in guess_letters:
+            new_masked_word += letter
+        else:
+            new_masked_word += '-'
+    return new_masked_word
 
