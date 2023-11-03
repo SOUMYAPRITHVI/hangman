@@ -49,17 +49,15 @@ def test_win_guessed_letter():
     guessed_letters = set()
     masked = hangman.guessed_word(word, guessed_letters)
     assert masked == "-------"
-    # , f"Expected: '-------', Got: '{masked}'"
 
     # Test case 2: Some guessed letters
     word = "hangman"
     guessed_letters = {"h", "n", "g", "m", "i"}
     masked = hangman.guessed_word(word, guessed_letters)
     assert masked == "h-ngm-n"
-    # f"Expected: 'pr-g--mmi-', Got: '{masked}'"
 
 def test_lose_guessed_letter():
-    # Test case 1: No guessed letters
+    # Test case 1: Some guessed letters
     word = "hangman"
     guessed_letters =  {"e", "s", "d", "x", "i","r"}
     masked = hangman.guessed_word(word, guessed_letters)
