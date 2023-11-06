@@ -53,14 +53,21 @@ def get_random_word(wordlist="/usr/share/dict/words"):
 #             print(f"Sorry, you lose! The word was '{target_word}'.")
 #             return "lose"
 
-def get_mask_word(target_word,guess):
+def get_mask_word(target_word,guesses):
     new_masked_word = ""
     for letter in target_word:
-        if letter in guess:
+        if letter in guesses:
             new_masked_word += letter
         else:
             new_masked_word += '-'
     return new_masked_word
+    # ret = []
+    # for i in target_word:
+    #     if i in guesses:
+    #         ret.append(i)
+    #     else:
+    #         ret.append("-")
+    # return "".join(ret)
 
 def get_status(secret_word,turns_remain,guesses):
     masked_word=get_mask_word(secret_word,guesses)
@@ -71,12 +78,14 @@ def play_round(secret_word,turns_remain,guesses,guess):
     if guess in guesses:
         return guesses,turns_remain,"next"
     guesses.append(guess)
-    
+    if "-" not in get_mask_word(secret_word,guesses):
+        return guesses,turns_remain,"game_won" 
     if guess not in secret_word:
         turns_remain-=1
         if turns_remain==0:
             return guesses,turns_remain,"game_over"
     return guesses,turns_remain,"next"
-print(play_round("rhino",1,['s','w','u','m','y','a'],'x'))  
+
+# print(play_round("rhino",1,['r','n','o','h'],'i'))  
 
 # print(get_status("hangman",6,{"m","h","a"}))
