@@ -38,29 +38,38 @@ def test_random_word_no_repeated_words():
     words = {hangman.get_random_word() for _ in range(10)}
     assert len(words) == 10
 
-def test_mask():
+def test_mask_word_no_guesses():
     word = "hangman"
-    assert hangman.mask(word)=="-------"
-
-
-def test_win_guessed_letter():
-    # Test case 1: No guessed letters
-    word = "hangman"
-    guessed_letters = set()
-    masked = hangman.guessed_word(word, guessed_letters)
+    guesses = set()
+    masked = hangman.get_mask_word(word, guesses)
     assert masked == "-------"
 
-    # Test case 2: Some guessed letters
+def test_mask_word_single_wrong_guess():
     word = "hangman"
-    guessed_letters = {"h", "n", "g", "m", "i"}
-    masked = hangman.guessed_word(word, guessed_letters)
-    assert masked == "h-ngm-n"
-
-def test_lose_guessed_letter():
-    # Test case 1: Some guessed letters
-    word = "hangman"
-    guessed_letters =  {"e", "s", "d", "x", "i","r"}
-    masked = hangman.guessed_word(word, guessed_letters)
+    guesses = {"i"}
+    masked = hangman.get_mask_word(word, guesses)
     assert masked == "-------"
-    
+
+def test_mask_word_single_correct_guess():
+    word = "hangman"
+    guesses =  {"m"}
+    masked = hangman.get_mask_word(word, guesses)
+    assert masked == "----m--"
+def test_mask_word_two_correct_guesses():
+    word = "hangman"
+    guesses =  {"m","h"}
+    masked = hangman.get_mask_word(word, guesses)
+    assert masked == "h---m--"
+def test_mask_word_single_guess_multiple_occurrence():
+    word = "hangman"
+    guesses =  {"m","h","a"}
+    masked = hangman.get_mask_word(word, guesses)
+    assert masked == "ha--ma-"
+
+def test_get_status():
+    secret_word = "hangman"
+    turns_remain=6
+    guesses =  ["h","m","a"]
+    status = hangman.get_status(secret_word, turns_remain,guesses)
+    assert status =="""Secret word : ha--ma- Turns remaining : 6 Guesses so far : hma"""
 
