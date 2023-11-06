@@ -73,13 +73,33 @@ def test_get_status():
     status = hangman.get_status(secret_word, turns_remain,guesses)
     assert status =="""Secret word : ha--ma- Turns remaining : 6 Guesses so far : hma"""
 
-def test_play_round_crrect_guess():
+def test_play_round_correct_alredy_guessed():
     secret_word="rhino"
     turns_remain=5
-    guesses={"i"}
+    guesses=["i"]
     guess='i'
     guesses,turns_remain,next_action=hangman.play_round(secret_word,turns_remain,guesses,guess)
-    assert guesses=={'i'}
+    assert guesses==['i']
     assert turns_remain==5
     assert next_action=="next"
+
+def  test_play_round_correct_guess():
+    secret_word="rhino"
+    turns_remain=5
+    guesses=[]
+    guess='i'
+    guesses,turns_remain,next_action=hangman.play_round(secret_word,turns_remain,guesses,guess)
+    assert guesses==['i']
+    assert turns_remain==5
+    assert next_action=="next"
+
+def  test_play_round_wrong_guess_gameover():
+    secret_word="rhino"
+    turns_remain=1
+    guesses=[]
+    guess='x'
+    guesses,turns_remain,next_action=hangman.play_round(secret_word,turns_remain,guesses,guess)
+    assert guesses==['x']
+    assert turns_remain==0
+    assert next_action=="game_over"
 
