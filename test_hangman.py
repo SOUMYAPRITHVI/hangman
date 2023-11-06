@@ -103,3 +103,11 @@ def  test_play_round_wrong_guess_gameover():
     assert turns_remain==0
     assert next_action=="game_over"
 
+def  test_play_round_wrong_guess_gameover():
+    secret_word="rhino"
+    turns_remain=1
+    guesses=['r','n','o','h']
+    guess='i'
+    guesses,turns_remain,next_action=hangman.play_round(secret_word,turns_remain,guesses,guess)
+    assert next_action=="game_won"
+
