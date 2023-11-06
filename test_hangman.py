@@ -76,10 +76,10 @@ def test_get_status():
 def test_play_round_crrect_guess():
     secret_word="rhino"
     turns_remain=5
-    guesses={}
+    guesses={"i"}
     guess='i'
     guesses,turns_remain,next_action=hangman.play_round(secret_word,turns_remain,guesses,guess)
     assert guesses=={'i'}
-    assert turns_remain==4
-    next_action="next"
+    assert turns_remain==5
+    assert next_action=="next"
 

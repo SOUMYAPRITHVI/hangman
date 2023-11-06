@@ -67,5 +67,8 @@ def get_status(secret_word,turns_remain,guesses):
     guesses = "".join(guesses)
     return f"""Secret word : {masked_word} Turns remaining : {turns_remain} Guesses so far : {guesses}"""
 
+def play_round(secret_word,turns_remain,guesses,guess):
+    if guess in guesses:
+        return guesses,turns_remain,"next"
 
 # print(get_status("hangman",6,{"m","h","a"}))
