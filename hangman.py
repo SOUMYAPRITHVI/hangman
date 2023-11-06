@@ -62,3 +62,10 @@ def get_mask_word(target_word,guess):
             new_masked_word += '-'
     return new_masked_word
 
+def get_status(secret_word,turns_remain,guesses):
+    masked_word=get_mask_word(secret_word,guesses)
+    guesses = "".join(guesses)
+    return f"""Secret word : {masked_word} Turns remaining : {turns_remain} Guesses so far : {guesses}"""
+
+
+# print(get_status("hangman",6,{"m","h","a"}))
