@@ -71,10 +71,12 @@ def play_round(secret_word,turns_remain,guesses,guess):
     if guess in guesses:
         return guesses,turns_remain,"next"
     guesses.append(guess)
-    if guess in secret_word:
-        get_mask_word(secret_word,guess) 
-        return guesses,turns_remain,"next"
-
     
+    if guess not in secret_word:
+        turns_remain-=1
+        if turns_remain==0:
+            return guesses,turns_remain,"game_over"
+    return guesses,turns_remain,"next"
+print(play_round("rhino",1,['s','w','u','m','y','a'],'x'))  
 
 # print(get_status("hangman",6,{"m","h","a"}))
