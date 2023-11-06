@@ -14,44 +14,6 @@ def get_random_word(wordlist="/usr/share/dict/words"):
             good_words.append(word)
 
         return random.choice(good_words)
-# def mask(word):
-#     mask_word=""
-#     for w in word:
-#         mask_word+="-"
-#     return mask_word
-   
-
-# def input_guessed_letter(target_word,masked_word ):
-#     max_attempts=6
-#     guessed_letters = set()
-#     while True:
-#         print(f"Word: {masked_word}")
-#         print(f"Guessed letters: {', '.join(guessed_letters)}")
-#         guess = input("Guess a letter: ").lower()
-
-#         if len(guess) != 1 or not guess.isalpha():
-#             print("Please enter a single letter.")
-#             continue
-
-#         if guess in guessed_letters:
-#             print("You've already guessed this letter.")
-#             continue
-
-#         guessed_letters.add(guess)
-#         if guess in target_word:
-#             masked_word=guessed_word(target_word,guessed_letters)
-#         else:
-#             max_attempts-=1
-#             print(f"Wrong guess! Attempts remaining: {max_attempts}")
-
-#         if masked_word == target_word:
-#             print(f"Word: {masked_word}")
-#             print("Congratulations, you win!")
-#             return "win"
-
-#         if max_attempts==0:
-#             print(f"Sorry, you lose! The word was '{target_word}'.")
-#             return "lose"
 
 def get_mask_word(target_word,guesses):
     new_masked_word = ""
@@ -61,14 +23,6 @@ def get_mask_word(target_word,guesses):
         else:
             new_masked_word += '-'
     return new_masked_word
-    # ret = []
-    # for i in target_word:
-    #     if i in guesses:
-    #         ret.append(i)
-    #     else:
-    #         ret.append("-")
-    # return "".join(ret)
-
 def get_status(secret_word,turns_remain,guesses):
     masked_word=get_mask_word(secret_word,guesses)
     guesses = "".join(guesses)
@@ -86,6 +40,28 @@ def play_round(secret_word,turns_remain,guesses,guess):
             return guesses,turns_remain,"game_over"
     return guesses,turns_remain,"next"
 
-# print(play_round("rhino",1,['r','n','o','h'],'i'))  
+def main():
+    print ("Welcome to Hangman!")
+    print ("-------------------\n\n")
+    secret_word = get_random_word()
+    print (secret_word)
+    turns_remaining = 6
+    guesses = []
+    while True:
+        status = get_status(secret_word, turns_remaining, guesses)
+        print (status)
+        guess = input("Enter your guess : ")
+        guesses, turns_remaining, next_action = play_round(secret_word, turns_remaining,guesses, guess)
+        if next_action == "game_over":
+            print (f"You lost. The word is {secret_word}")
+            break
+        if next_action == "game_won":
+            print (f"You won. The word is {secret_word}")
+            break
 
+if __name__ == "__main__":
+    main()
+
+# print(play_round("rhino",1,['r','n','o','h'],'i'))  
+print(play_round("rhino",1,['s','w','u','m','y','a'],'x')) 
 # print(get_status("hangman",6,{"m","h","a"}))
